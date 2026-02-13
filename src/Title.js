@@ -136,9 +136,9 @@ PrinceJS.Title.prototype = {
 
     let keyboardTips = [
       "FLECHAS/WASD: MOVER",
-      "SHIFT: AGARRAR",
-      "       CAMINAR LENTO",
-      "ESPACIO: SALTAR"
+      "SHIFT/E: AGARRAR",
+      "         CAMINAR LENTO",
+      "ESPACIO/R: SALTAR"
     ];
 
     for (let i = 0; i < keyboardTips.length; i++) {

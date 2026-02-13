@@ -23,6 +23,9 @@ PrinceJS.Kid = function (game, level, location, direction, room) {
 
   this.cursors = this.game.input.keyboard.createCursorKeys();
   this.shiftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
+  this.eKey = this.game.input.keyboard.addKey(Phaser.Keyboard.E);  // Alternative to Shift
+  this.rKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);  // Alternative to Space/Up
+
 
   this.registerCommand(0xfd, this.CMD_UP); // 253
   this.registerCommand(0xfc, this.CMD_DOWN); // 252
@@ -1104,7 +1107,7 @@ PrinceJS.Kid.prototype.keyR = function () {
 };
 
 PrinceJS.Kid.prototype.keyU = function () {
-  return this.cursors.up.isDown || this.pointerU() || PrinceJS.Utils.gamepadUpPressed(this.game);
+  return this.cursors.up.isDown || this.rKey.isDown || this.pointerU() || PrinceJS.Utils.gamepadUpPressed(this.game);
 };
 
 PrinceJS.Kid.prototype.keyD = function () {
@@ -1112,7 +1115,7 @@ PrinceJS.Kid.prototype.keyD = function () {
 };
 
 PrinceJS.Kid.prototype.keyS = function () {
-  return this.shiftKey.isDown || this.pointerS() || PrinceJS.Utils.gamepadActionPressed(this.game);
+  return this.shiftKey.isDown || this.eKey.isDown || this.pointerS() || PrinceJS.Utils.gamepadActionPressed(this.game);
 };
 
 PrinceJS.Kid.prototype.pointerL = function () {
