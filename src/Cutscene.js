@@ -194,9 +194,12 @@ PrinceJS.Cutscene.prototype = {
     if (PrinceJS.currentLevel === 1) {
       this.state.start("Credits");
     } else if (PrinceJS.currentLevel === 15) {
-      // END OF TUTORIAL (Or Game) -> Go to Menu (Title)
-      // PrinceJS.Restart(); // Do not restart, let Title handle state? 
-      // Actually Title resets state.
+      // After the Level 15 cutscene
+      if (PrinceJS.fromTutorial) {
+        PrinceJS.fromTutorial = false;
+        this.showTutorialEndText();
+        return;
+      }
       PrinceJS.Restart();
       this.state.start("Title");
     } else if (PrinceJS.currentLevel === 16) {
@@ -205,6 +208,47 @@ PrinceJS.Cutscene.prototype = {
     } else {
       this.play();
     }
+  },
+
+  showTutorialEndText: function () {
+    // ===================================================
+    // MODIFICA ESTAS LÍNEAS PARA CAMBIAR EL TEXTO FINAL
+    // ===================================================
+    let lines = [
+      "Eso fue relativamente facil, verdad?",
+      "Espero que te guste manejarme como tu",
+      "principeso para salir a buscarte",
+      "porque siempre me haces sentir un rey",
+      "Te amo, Feliz San Valentin",
+      "pd: ahora puedes jugar el juego completo :p"
+    ];
+    // ===================================================
+
+    // The cover sprite is already full black (alpha=1) from the fadeOut.
+    // Just add text on top using screen coordinates.
+    let centerX = PrinceJS.SCREEN_WIDTH * 0.5;
+    let centerY = PrinceJS.SCREEN_HEIGHT * 0.5;
+    let lineHeight = 18;
+    let startY = centerY - (lines.length * lineHeight * 0.5);
+
+    for (let i = 0; i < lines.length; i++) {
+      let text = this.game.add.bitmapText(
+        centerX,
+        startY + (i * lineHeight),
+        "font",
+        lines[i],
+        16
+      );
+      text.anchor.setTo(0.5, 0.5);
+    }
+
+    PrinceJS.Utils.delayed(() => {
+      this.input.keyboard.onDownCallback = () => {
+        this.input.keyboard.onDownCallback = null;
+        PrinceJS.Restart();
+        this.state.start("Title");
+      };
+    }, 500);
   },
 
   reset: function () {

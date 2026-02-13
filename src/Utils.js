@@ -179,9 +179,7 @@ PrinceJS.Utils = {
   gamepadUpPressed: function (game) {
     return (
       PrinceJS.Utils.gamepadButtonDownCheck(game, [
-        PrinceJS.Gamepad.A,
-        PrinceJS.Gamepad.R,
-        PrinceJS.Gamepad.ZR,
+        PrinceJS.Gamepad.A,  // Xbox A button = Jump
         PrinceJS.Gamepad.DPadU
       ]) || PrinceJS.Utils.gamepadAxisCheck(game, [PrinceJS.Gamepad.Axis.LY, PrinceJS.Gamepad.Axis.RY], "<")
     );
@@ -210,10 +208,7 @@ PrinceJS.Utils = {
 
   gamepadActionPressed: function (game) {
     return PrinceJS.Utils.gamepadButtonDownCheck(game, [
-      PrinceJS.Gamepad.B,
-      PrinceJS.Gamepad.Y,
-      PrinceJS.Gamepad.L,
-      PrinceJS.Gamepad.ZL
+      PrinceJS.Gamepad.X  // Xbox X button = Walk slow / Grab / Attack
     ]);
   },
 
@@ -304,14 +299,14 @@ PrinceJS.Utils = {
     if (PrinceJS.Utils.getRemainingMinutes() > 15) {
       PrinceJS.Utils.minutes = 15;
       let date = new Date();
-      date.setMinutes(date.getMinutes() - (60 - PrinceJS.Utils.minutes));
+      date.setMinutes(date.getMinutes() - (300 - PrinceJS.Utils.minutes));
       PrinceJS.startTime = date;
       PrinceJS.Utils.updateQuery();
     }
   },
 
   resetRemainingMinutesTo60() {
-    PrinceJS.Utils.minutes = 60;
+    PrinceJS.Utils.minutes = 300;
     PrinceJS.startTime = undefined;
     PrinceJS.endTime = undefined;
     PrinceJS.Utils.updateQuery();
@@ -332,12 +327,12 @@ PrinceJS.Utils = {
 
   getRemainingMinutes: function () {
     let deltaTime = PrinceJS.Utils.getDeltaTime();
-    return Math.min(60, Math.max(0, 60 - deltaTime.minutes));
+    return Math.min(300, Math.max(0, 300 - deltaTime.minutes));
   },
 
   getRemainingSeconds: function () {
     let deltaTime = PrinceJS.Utils.getDeltaTime();
-    return Math.min(60, Math.max(0, 60 - deltaTime.seconds));
+    return Math.min(300, Math.max(0, 300 - deltaTime.seconds));
   },
 
   applyStrength: function (value) {
@@ -363,7 +358,7 @@ PrinceJS.Utils = {
     }
     if (query.get("time") || query.get("t")) {
       let queryTime = parseInt(query.get("time") || query.get("t"), 10);
-      if (!isNaN(queryTime) && queryTime >= 1 && queryTime <= 60) {
+      if (!isNaN(queryTime) && queryTime >= 1 && queryTime <= 300) {
         PrinceJS.minutes = queryTime;
       }
     }
@@ -441,9 +436,9 @@ PrinceJS.Utils = {
       null,
       null,
       "?" +
-        Object.keys(state)
-          .map((key) => key + "=" + state[key])
-          .join("&")
+      Object.keys(state)
+        .map((key) => key + "=" + state[key])
+        .join("&")
     );
   }
 };

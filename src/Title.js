@@ -63,15 +63,15 @@ PrinceJS.Title.prototype = {
 
     // MENU STATE
     this.menuOptions = [
+      { text: "JUEGO COMPLETO", action: () => this.startGame(1), locked: true },
       { text: "EMPEZAR", action: () => this.startGame(0) }, // Level 0
-      { text: "CONTROLES", action: () => this.toggleControls() },
-      { text: "JUEGO COMPLETO", action: () => this.startGame(1), locked: true }
+      { text: "CONTROLES", action: () => this.toggleControls() }
     ];
 
     // Check Unlock Status
     try {
       if (localStorage.getItem('pop_unlocked') === 'true') {
-        this.menuOptions[2].locked = false;
+        this.menuOptions[0].locked = false;
       }
     } catch (e) { }
 
@@ -80,13 +80,19 @@ PrinceJS.Title.prototype = {
     this.createControlsOverlay();
 
     this.inControls = false;
+
+    // Delay gamepad input to prevent carryover from Press to Start
+    this.gamepadReady = false;
+    PrinceJS.Utils.delayed(() => {
+      this.gamepadReady = true;
+    }, 500);
   },
 
   createMenu: function () {
     this.menuGroup = this.game.add.group();
     this.buttons = [];
 
-    let startY = this.world.centerY + 50;
+    let startY = this.world.centerY - 20;
 
     for (let i = 0; i < this.menuOptions.length; i++) {
       let opt = this.menuOptions[i];
@@ -103,7 +109,6 @@ PrinceJS.Title.prototype = {
       this.menuGroup.add(text);
       this.buttons.push(text);
     }
-
     this.updateSelection();
   },
 
@@ -123,9 +128,18 @@ PrinceJS.Title.prototype = {
     this.controlsGroup.add(title);
 
     let tips = [
+      "TECLADO:",
       "FLECHAS / WASD : MOVER",
       "SHIFT : AGARRAR / ANDAR DESPACIO",
       "ESPACIO : SALTAR / ACCION",
+      "",
+      "MANDO XBOX:",
+      "JOYSTICK / D-PAD : MOVER",
+      "X : AGARRAR / ANDAR DESPACIO",
+      "A : SALTAR / ACCION",
+      "SELECT : REINICIAR NIVEL",
+      "",
+      "MENU: USA D-PAD ARRIBA/ABAJO + A",
       "",
       "CONSEJO: ANDA PARA EVITAR PINCHOS",
       "CONSEJO: AGARRATE PARA NO HACERTE DAÑO"
@@ -208,5 +222,33 @@ PrinceJS.Title.prototype = {
     this.game.sound.stopAll();
   },
 
-  update: function () { } // Override default update to disable cutscene timer
+  update: function () {
+    // Don't process gamepad input until ready (prevents carryover from Press to Start)
+    if (!this.gamepadReady) return;
+
+    // Gamepad menu navigation
+    if (this.inControls) {
+      if (PrinceJS.Utils.gamepadButtonPressedCheck(this.game, [PrinceJS.Gamepad.A, PrinceJS.Gamepad.B], "controls_exit")) {
+        this.toggleControls();
+      }
+      return;
+    }
+
+    // Navigate up (D-pad only, no continuous joystick)
+    if (PrinceJS.Utils.gamepadButtonPressedCheck(this.game, [PrinceJS.Gamepad.DPadU], "menu_up")) {
+      this.selectedOption--;
+      if (this.selectedOption < 0) this.selectedOption = this.buttons.length - 1;
+      this.updateSelection();
+    }
+    // Navigate down (D-pad only)
+    else if (PrinceJS.Utils.gamepadButtonPressedCheck(this.game, [PrinceJS.Gamepad.DPadD], "menu_down")) {
+      this.selectedOption++;
+      if (this.selectedOption >= this.buttons.length) this.selectedOption = 0;
+      this.updateSelection();
+    }
+    // Select option
+    if (PrinceJS.Utils.gamepadButtonPressedCheck(this.game, [PrinceJS.Gamepad.A], "menu_select")) {
+      this.selectOption();
+    }
+  }
 };

@@ -32,7 +32,7 @@ PrinceJS.Game.prototype = {
 
     if (!PrinceJS.startTime) {
       let date = new Date();
-      date.setMinutes(date.getMinutes() - (60 - PrinceJS.minutes));
+      date.setMinutes(date.getMinutes() - (300 - PrinceJS.minutes));
       PrinceJS.startTime = date;
     }
 
@@ -161,16 +161,8 @@ PrinceJS.Game.prototype = {
           this.showRemainingMinutes();
         }
       }
-      if (PrinceJS.Utils.gamepadInfoPressed(this.game)) {
-        if (this.isRemainingMinutesShown() || this.isLevelShown()) {
-          this.restartLevel(true);
-        } else {
-          this.showRemainingMinutes();
-        }
-      } else if (PrinceJS.Utils.gamepadPreviousPressed(this.game)) {
-        this.previousLevel(PrinceJS.currentLevel, true);
-      } else if (PrinceJS.Utils.gamepadNextPressed(this.game)) {
-        this.nextLevel(PrinceJS.currentLevel, true, true);
+      if (PrinceJS.Utils.gamepadPreviousPressed(this.game)) {
+        this.restartLevel(true);  // Xbox Select/Back button = Restart level
       }
     }
   },
@@ -639,6 +631,7 @@ PrinceJS.Game.prototype = {
 
       // 2. Jump to Level 15 (Cutscene - Embrace)
       PrinceJS.currentLevel = 15;
+      PrinceJS.fromTutorial = true;
       this.state.start("Cutscene");
       return;
     }

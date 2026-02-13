@@ -51,10 +51,6 @@
                     "modifier": 0
                 },
                 {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
                     "element": 0,
                     "modifier": 0
                 },
@@ -87,15 +83,11 @@
                     "modifier": 0
                 },
                 {
-                    "element": 20,
+                    "element": 0,
                     "modifier": 0
                 },
                 {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
-                    "element": 1,
+                    "element": 0,
                     "modifier": 0
                 },
                 {
@@ -107,7 +99,7 @@
                     "modifier": 0
                 },
                 {
-                    "element": 1,
+                    "element": 11,
                     "modifier": 0
                 },
                 {
@@ -115,7 +107,15 @@
                     "modifier": 0
                 },
                 {
-                    "element": 1,
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 11,
                     "modifier": 0
                 },
                 {
@@ -123,11 +123,11 @@
                     "modifier": 0
                 },
                 {
-                    "element": 1,
+                    "element": 22,
                     "modifier": 0
                 },
                 {
-                    "element": 20,
+                    "element": 1,
                     "modifier": 0
                 }
             ]
@@ -176,10 +176,6 @@
                     "modifier": 0
                 },
                 {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
                     "element": 0,
                     "modifier": 0
                 },
@@ -212,15 +208,11 @@
                     "modifier": 0
                 },
                 {
-                    "element": 20,
+                    "element": 0,
                     "modifier": 0
                 },
                 {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
-                    "element": 1,
+                    "element": 0,
                     "modifier": 0
                 },
                 {
@@ -252,7 +244,15 @@
                     "modifier": 0
                 },
                 {
-                    "element": 20,
+                    "element": 15,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
                     "modifier": 0
                 }
             ]
@@ -289,19 +289,19 @@
                     "modifier": 0
                 },
                 {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
                     "element": 20,
                     "modifier": 0
                 },
                 {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
-                    "element": 20,
+                    "element": 0,
                     "modifier": 0
                 },
                 {
@@ -326,7 +326,7 @@
                 },
                 {
                     "element": 0,
-                    "modifier": 0
+                    "modifier": 1
                 },
                 {
                     "element": 17,
@@ -341,10 +341,6 @@
                     "modifier": 0
                 },
                 {
-                    "element": 20,
-                    "modifier": 0
-                },
-                {
                     "element": 1,
                     "modifier": 0
                 },
@@ -361,7 +357,11 @@
                     "modifier": 0
                 },
                 {
-                    "element": 1,
+                    "element": 2,
+                    "modifier": 0
+                },
+                {
+                    "element": 2,
                     "modifier": 0
                 },
                 {
@@ -387,17 +387,24 @@
         "room": 1,
         "location": 21,
         "direction": 1,
-        "sword": true
+        "sword": false
     },
     "guards": [
         {
             "room": 2,
-            "location": 4,
-            "skill": 1,
-            "colors": 1,
-            "type": 0,
+            "location": 26,
+            "skill": 0,
+            "colors": 2,
+            "type": "guard",
             "direction": -1
         }
     ],
-    "events": []
+    "events": [
+        {
+            "number": 0,
+            "room": 3,
+            "location": 18,
+            "next": 0
+        }
+    ]
 }

@@ -111,6 +111,10 @@ PrinceJS.Preloader.prototype = {
     if (PrinceJS.Utils.pointerPressed(this.game)) {
       this.start();
     }
+    // Gamepad support: any button starts
+    if (PrinceJS.Utils.gamepadAnyPressed(this.game)) {
+      this.start();
+    }
   },
 
   start: function () {

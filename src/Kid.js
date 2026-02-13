@@ -80,7 +80,7 @@ PrinceJS.Kid.prototype.CMD_IFWTLESS = function (data) {
   }
 };
 
-PrinceJS.Kid.prototype.CMD_EFFECT = function (data) {};
+PrinceJS.Kid.prototype.CMD_EFFECT = function (data) { };
 
 PrinceJS.Kid.prototype.CMD_TAP = function (data) {
   if (["softLand"].includes(this.action)) {
