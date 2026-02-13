@@ -5,7 +5,7 @@ PrinceJS.Title = function (game) {
 };
 
 PrinceJS.Title.prototype = {
-  preload: function () {},
+  preload: function () { },
 
   create: function () {
     this.stopMusic();
@@ -15,13 +15,16 @@ PrinceJS.Title.prototype = {
     this.game.world.setBounds(0, 0, PrinceJS.SCREEN_WIDTH, PrinceJS.SCREEN_HEIGHT);
 
     this.back = this.game.add.image(0, 0, "title", "main_background");
-    this.back.alpha = 0;
+    this.back.alpha = 1;
 
+    // Skip the prologue intro tweens and go straight to the menu
+    /*
     this.tween1 = this.game.add.tween(this.back).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, false, 0, 0, false);
 
     this.tween1.onComplete.add(() => {
       this.game.sound.play("PrologueA");
     });
+    */
 
     this.presents = this.game.add.image(this.world.centerX, this.world.centerY + 29.5, "title", "presents");
     this.presents.anchor.setTo(0.5, 0.5);
@@ -46,58 +49,153 @@ PrinceJS.Title.prototype = {
     this.tween3 = this.game.add
       .tween(this.textBack)
       .to({ alpha: 0 }, 2000, Phaser.Easing.Linear.None, false, 0, 0, false);
+
+    // Disable automatic transition to cutscene to keep the menu visible
+    /*
     this.tween3.onComplete.add(() => {
       PrinceJS.Utils.delayed(() => {
         this.cutscene();
       }, 3500);
     });
+    */
 
-    this.input.keyboard.onDownCallback = this.play.bind(this);
+    this.input.keyboard.onDownCallback = this.handleInput.bind(this);
+
+    // MENU STATE
+    this.menuOptions = [
+      { text: "EMPEZAR", action: () => this.startGame(0) }, // Level 0
+      { text: "CONTROLES", action: () => this.toggleControls() },
+      { text: "JUEGO COMPLETO", action: () => this.startGame(1), locked: true }
+    ];
+
+    // Check Unlock Status
+    try {
+      if (localStorage.getItem('pop_unlocked') === 'true') {
+        this.menuOptions[2].locked = false;
+      }
+    } catch (e) { }
+
+    this.selectedOption = 0;
+    this.createMenu();
+    this.createControlsOverlay();
+
+    this.inControls = false;
   },
 
-  update: function () {
-    switch (this.tick) {
-      case 0:
-        this.tween1.start();
-        break;
-      case 250:
-        this.presents.visible = true;
-        break;
-      case 450:
-        this.presents.visible = false;
-        break;
-      case 530:
-        this.author.visible = true;
-        break;
-      case 730:
-        this.author.visible = false;
-        break;
-      case 1030:
-        this.prince.visible = true;
-        break;
-      case 1600:
-        this.tween2.start();
-        this.game.sound.play("PrologueB");
-        break;
-      case 2250:
-        this.back.visible = false;
-        this.prince.visible = false;
-        this.tween3.start();
-        break;
+  createMenu: function () {
+    this.menuGroup = this.game.add.group();
+    this.buttons = [];
+
+    let startY = this.world.centerY + 50;
+
+    for (let i = 0; i < this.menuOptions.length; i++) {
+      let opt = this.menuOptions[i];
+      if (opt.locked) continue;
+
+      let text = this.game.add.bitmapText(this.world.centerX, startY + (i * 30), "font", opt.text, 16);
+      text.anchor.setTo(0.5, 0.5);
+      text.inputEnabled = true;
+      text.events.onInputDown.add(() => {
+        this.selectedOption = i;
+        this.selectOption();
+      });
+
+      this.menuGroup.add(text);
+      this.buttons.push(text);
     }
 
-    this.tick++;
-    this.textBack.updateCrop();
+    this.updateSelection();
+  },
 
-    if (PrinceJS.Utils.continueGame(this.game)) {
-      this.play();
+  createControlsOverlay: function () {
+    this.controlsGroup = this.game.add.group();
+    this.controlsGroup.visible = false;
+
+    // Background dim
+    let bg = this.game.add.graphics(0, 0);
+    bg.beginFill(0x000000, 0.9);
+    bg.drawRect(0, 0, this.world.width, this.world.height);
+    bg.endFill();
+    this.controlsGroup.add(bg);
+
+    let title = this.game.add.bitmapText(this.world.centerX, 40, "font", "CONTROLES", 16);
+    title.anchor.setTo(0.5, 0.5);
+    this.controlsGroup.add(title);
+
+    let tips = [
+      "FLECHAS / WASD : MOVER",
+      "SHIFT : AGARRAR / ANDAR DESPACIO",
+      "ESPACIO : SALTAR / ACCION",
+      "",
+      "CONSEJO: ANDA PARA EVITAR PINCHOS",
+      "CONSEJO: AGARRATE PARA NO HACERTE DAÑO"
+    ];
+
+    for (let i = 0; i < tips.length; i++) {
+      let t = this.game.add.bitmapText(this.world.centerX, 80 + (i * 15), "font", tips[i], 12);
+      t.anchor.setTo(0.5, 0.5);
+      this.controlsGroup.add(t);
     }
+
+    let back = this.game.add.bitmapText(this.world.centerX, this.world.height - 30, "font", "PULSA UNA TECLA PARA VOLVER", 12);
+    back.anchor.setTo(0.5, 0.5);
+    this.controlsGroup.add(back);
+  },
+
+  updateSelection: function () {
+    for (let i = 0; i < this.buttons.length; i++) {
+      let btn = this.buttons[i];
+      if (i === this.selectedOption) {
+        btn.tint = 0xFF0000; // Red selection
+      } else {
+        btn.tint = 0xFFFFFF;
+      }
+    }
+  },
+
+  handleInput: function (e) {
+    if (this.inControls) {
+      this.toggleControls();
+      return;
+    }
+
+    if (e.keyCode === Phaser.Keyboard.UP) {
+      this.selectedOption--;
+      if (this.selectedOption < 0) this.selectedOption = this.buttons.length - 1;
+      this.updateSelection();
+    } else if (e.keyCode === Phaser.Keyboard.DOWN) {
+      this.selectedOption++;
+      if (this.selectedOption >= this.buttons.length) this.selectedOption = 0;
+      this.updateSelection();
+    } else if (e.keyCode === Phaser.Keyboard.ENTER || e.keyCode === Phaser.Keyboard.SPACEBAR) {
+      this.selectOption();
+    }
+  },
+
+  selectOption: function () {
+    let activeOptions = this.menuOptions.filter(o => !o.locked);
+    let opt = activeOptions[this.selectedOption];
+    if (opt && opt.action) {
+      opt.action();
+    }
+  },
+
+  toggleControls: function () {
+    this.inControls = !this.inControls;
+    this.controlsGroup.visible = this.inControls;
+    this.menuGroup.visible = !this.inControls;
+  },
+
+  startGame: function (level) {
+    this.stopMusic();
+    this.input.keyboard.onDownCallback = null;
+    PrinceJS.currentLevel = level;
+    this.state.start("Game");
   },
 
   play: function () {
-    this.stopMusic();
-    this.input.keyboard.onDownCallback = null;
-    this.state.start("Game");
+    // Legacy support
+    this.startGame(1);
   },
 
   cutscene: function () {
@@ -108,5 +206,7 @@ PrinceJS.Title.prototype = {
 
   stopMusic: function () {
     this.game.sound.stopAll();
-  }
+  },
+
+  update: function () { } // Override default update to disable cutscene timer
 };

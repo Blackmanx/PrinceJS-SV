@@ -194,8 +194,11 @@ PrinceJS.Cutscene.prototype = {
     if (PrinceJS.currentLevel === 1) {
       this.state.start("Credits");
     } else if (PrinceJS.currentLevel === 15) {
+      // END OF TUTORIAL (Or Game) -> Go to Menu (Title)
+      // PrinceJS.Restart(); // Do not restart, let Title handle state? 
+      // Actually Title resets state.
       PrinceJS.Restart();
-      this.state.start("EndTitle");
+      this.state.start("Title");
     } else if (PrinceJS.currentLevel === 16) {
       PrinceJS.Restart();
       this.state.start("Title");

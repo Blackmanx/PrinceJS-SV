@@ -520,7 +520,7 @@ PrinceJS.Game.prototype = {
             };
             break;
           case "WAIT":
-            fn = () => {};
+            fn = () => { };
             break;
           case "TURN":
             fn = () => {
@@ -625,6 +625,21 @@ PrinceJS.Game.prototype = {
 
   nextLevel: function (triggerLevel, skipped = false, keepRemainingTime = false) {
     if (triggerLevel !== undefined && triggerLevel !== PrinceJS.currentLevel) {
+      return;
+    }
+
+    // LEVEL 0 COMPLETION (TUTORIAL END)
+    if (PrinceJS.currentLevel === 0) {
+      // 1. Unlock Full Game in LocalStorage
+      try {
+        localStorage.setItem('pop_unlocked', 'true');
+      } catch (e) {
+        console.warn("Could not save unlock status:", e);
+      }
+
+      // 2. Jump to Level 15 (Cutscene - Embrace)
+      PrinceJS.currentLevel = 15;
+      this.state.start("Cutscene");
       return;
     }
 

@@ -1,6 +1,6 @@
 "use strict";
 
-PrinceJS.Preloader = function (game) {};
+PrinceJS.Preloader = function (game) { };
 
 PrinceJS.Preloader.prototype = {
   preload: function () {
@@ -13,9 +13,9 @@ PrinceJS.Preloader.prototype = {
     );
     this.text.anchor.setTo(0.5, 0.5);
 
-    this.load.atlasJSONHash("kid", "assets/gfx/kid.png", "assets/gfx/kid.json");
-    this.load.atlasJSONHash("princess", "assets/gfx/princess.png", "assets/gfx/princess.json");
-    this.load.atlasJSONHash("vizier", "assets/gfx/vizier.png", "assets/gfx/vizier.json");
+    this.load.atlasJSONHash("kid", "assets/gfx/kid_custom_full_faces.png?v=" + Date.now(), "assets/gfx/kid_custom_full_faces.json");
+    this.load.atlasJSONHash("princess", "assets/gfx/princess_custom.png?v=" + Date.now(), "assets/gfx/princess_custom.json");
+    this.load.atlasJSONHash("vizier", "assets/gfx/vizier.png?v=" + Date.now(), "assets/gfx/vizier.json");
     this.load.atlasJSONHash("mouse", "assets/gfx/mouse.png", "assets/gfx/mouse.json");
     this.load.atlasJSONHash("guard-1", "assets/gfx/guard-1.png", "assets/gfx/guard-1.json");
     this.load.atlasJSONHash("guard-2", "assets/gfx/guard-2.png", "assets/gfx/guard-2.json");

@@ -1,0 +1,403 @@
+{
+    "number": 0,
+    "name": "Tutorial",
+    "size": {
+        "width": 3,
+        "height": 1
+    },
+    "type": 0,
+    "room": [
+        {
+            "id": 1,
+            "tile": [
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "tile": [
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "tile": [
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 17,
+                    "modifier": 0
+                },
+                {
+                    "element": 0,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 1,
+                    "modifier": 0
+                },
+                {
+                    "element": 20,
+                    "modifier": 0
+                }
+            ]
+        }
+    ],
+    "prince": {
+        "room": 1,
+        "location": 21,
+        "direction": 1,
+        "sword": true
+    },
+    "guards": [
+        {
+            "room": 2,
+            "location": 4,
+            "skill": 1,
+            "colors": 1,
+            "type": 0,
+            "direction": -1
+        }
+    ],
+    "events": []
+}
