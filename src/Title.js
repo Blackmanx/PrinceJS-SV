@@ -123,35 +123,59 @@ PrinceJS.Title.prototype = {
     bg.endFill();
     this.controlsGroup.add(bg);
 
-    let title = this.game.add.bitmapText(this.world.centerX, 40, "font", "CONTROLES", 16);
+    let title = this.game.add.bitmapText(this.world.centerX, 15, "font", "CONTROLES", 16);
     title.anchor.setTo(0.5, 0.5);
     this.controlsGroup.add(title);
 
-    let tips = [
-      "TECLADO:",
-      "FLECHAS / WASD : MOVER",
-      "SHIFT : AGARRAR / ANDAR DESPACIO",
-      "ESPACIO : SALTAR / ACCION",
-      "",
-      "MANDO XBOX:",
-      "JOYSTICK / D-PAD : MOVER",
-      "X : AGARRAR / ANDAR DESPACIO",
-      "A : SALTAR / ACCION",
-      "SELECT : REINICIAR NIVEL",
-      "",
-      "MENU: USA D-PAD ARRIBA/ABAJO + A",
-      "",
-      "CONSEJO: ANDA PARA EVITAR PINCHOS",
-      "CONSEJO: AGARRATE PARA NO HACERTE DAÑO"
+    // Left column: Keyboard
+    let leftX = 50;
+    let startY = 40;
+
+    let keyboardTitle = this.game.add.bitmapText(leftX, startY, "font", "TECLADO", 12);
+    this.controlsGroup.add(keyboardTitle);
+
+    let keyboardTips = [
+      "FLECHAS/WASD: MOVER",
+      "SHIFT: AGARRAR",
+      "       CAMINAR LENTO",
+      "ESPACIO: SALTAR"
     ];
 
-    for (let i = 0; i < tips.length; i++) {
-      let t = this.game.add.bitmapText(this.world.centerX, 80 + (i * 15), "font", tips[i], 12);
-      t.anchor.setTo(0.5, 0.5);
+    for (let i = 0; i < keyboardTips.length; i++) {
+      let t = this.game.add.bitmapText(leftX, startY + 18 + (i * 11), "font", keyboardTips[i], 9);
       this.controlsGroup.add(t);
     }
 
-    let back = this.game.add.bitmapText(this.world.centerX, this.world.height - 30, "font", "PULSA UNA TECLA PARA VOLVER", 12);
+    // Right column: Xbox Controller
+    let rightX = 190;
+
+    let xboxTitle = this.game.add.bitmapText(rightX, startY, "font", "MANDO XBOX", 12);
+    this.controlsGroup.add(xboxTitle);
+
+    let xboxTips = [
+      "JOYSTICK/DPAD: MOVER",
+      "X: AGARRAR",
+      "   CAMINAR LENTO",
+      "A: SALTAR",
+      "SELECT: REINICIAR"
+    ];
+
+    for (let i = 0; i < xboxTips.length; i++) {
+      let t = this.game.add.bitmapText(rightX, startY + 18 + (i * 11), "font", xboxTips[i], 9);
+      this.controlsGroup.add(t);
+    }
+
+    // Bottom tips
+    let tipsY = 135;
+    let tip1 = this.game.add.bitmapText(this.world.centerX, tipsY, "font", "CAMINA LENTO PARA EVITAR PINCHOS", 9);
+    tip1.anchor.setTo(0.5, 0.5);
+    this.controlsGroup.add(tip1);
+
+    let tip2 = this.game.add.bitmapText(this.world.centerX, tipsY + 12, "font", "AGARRATE PARA NO CAERTE", 9);
+    tip2.anchor.setTo(0.5, 0.5);
+    this.controlsGroup.add(tip2);
+
+    let back = this.game.add.bitmapText(this.world.centerX, 170, "font", "PULSA PARA VOLVER", 10);
     back.anchor.setTo(0.5, 0.5);
     this.controlsGroup.add(back);
   },
